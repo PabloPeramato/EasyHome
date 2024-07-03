@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <script src="/static/js/login.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <a class="a" href="login">Iniciar sesión</a>
+        <a class="a" href="register">Registrarse</a>
+    </div>
+
+    <div id="flash-message"></div>
+    <div class="container">
+        <div class="form-box">
+            <h1>Iniciar sesión</h1>
+            <form method="post" action="login">
+                <div class="form-group">
+                    <label for="username">Usuario:</label>
+                    <input type="text" name="username" id="username1" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <div class="forgot-password">
+                    <input type="hidden" id="" name="input">
+                    <a href="forgotPassword">¿Has olvidado la contraseña?</a>
+                </div>
+                <input type="submit" value="Iniciar sesión">
+            </form>
+            {% with messages = get_flashed_messages() %}
+                {% if messages and (messages[-1] == 'Contraseña actualizada correctamente.' or messages[-1] == 'Sesión cerrada correctamente!' or messages[-1] == 'Correo electrónico enviado. Por favor, revise su bandeja de entrada.' ) %}
+                    <div id="flash-message1" class="flash-message1">
+                        {{ messages[-1] }}
+                    </div>
+                {% elif messages %}
+                    <div id="flash-message" class="flash-message">
+                        {{ messages[-1] }}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+{% extends "baseInicio.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<!doctype html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/sensorCO2.css">
+    <script src="/static/js/sensorCO2.js"></script>
+</head>
+<body>
+    <div id="flash-message" class="flash-message"></div>
+    <h1>{{ title }}</h1>
+    <p>Sesión iniciada como {{ session['username'] }}</p>
+    <div class="container">
+        <div class="section">
+            <div class="section-content devices">
+                <div class="column">
+                    <div class="info">
+                        <h2>CO2</h2>
+                        <input type="text" value="{{CO2}} ppm" readonly>
+                        <a href="https://thingspeak.com/channels/2583458/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=spline&update=15&width=1500&height=800" target="_blank">
+                            <button>Gráfica</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="column2">
+                    <div class="info2">
+                        <h2>Activar extractor</h2>
+                        <input type="text" value="{{estadoMotor}}" readonly>
+                        <div class="section-content4">
+                            <div class="column3">
+                                <form class="info2" action="{{ url_for('activarMotorCO2') }}" method="POST">
+                                    <button type="submit">Activar</button>
+                                </form>
+                            </div>
+                            <div class="column3">
+                                <form class="info2" action="{{ url_for('desactivarMotorCO2') }}" method="POST">
+                                    <button type="submit">Desactivar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info2">
+                        <h2>Abrir ventana</h2>
+                        <input type="text" value="{{estadoServo}}" readonly>
+                        <div class="section-content4">
+                            <div class="column3">
+                                <form class="info2" action="{{ url_for('activarServoCO2') }}" method="POST">
+                                    <button type="submit">Abrir</button>
+                                </form>
+                            </div>
+                            <div class="column3">
+                                <form class="info2" action="{{ url_for('desactivarServoCO2') }}" method="POST">
+                                    <button type="submit">Cerrada</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info2">
+                        <h2>Configurar extractor automático</h2>
+                        <div class="section-content3">
+                            <div class="column3">
+                                <form class="info2">
+                                    {% if saltoExtractor == 'nulo' and metaExtractor == 'nulo' %}
+                                        <input type="text2" id="numero1" name="numero1" oninput="validarInput(event)" value="CO2 para arrancar el extractor (ppm)">
+                                        <input type="text2" id="numero2" name="numero2" oninput="validarInput(event)" value="CO2 deseado (ppm)">
+                                    {% else %}
+                                        <input type="text2" id="numero1" name="numero1" oninput="validarInput(event)" value="{{saltoExtractor}} ppm">
+                                        <input type="text2" id="numero2" name="numero2" oninput="validarInput(event)" value="{{metaExtractor}} ppm">
+                                    {% endif %}
+                                </form>
+                            </div>
+                            <div class="column3">
+                                <form id="form1" class="info2" action="{{ url_for('configurarExtractor') }}" method="POST">
+                                    <input type="hidden" id="hiddenInput1" name="input1">
+                                    <input type="hidden" id="hiddenInput2" name="input2">
+                                    <button type="submit" onclick="transferirValores('numero1', 'numero2', 'form1')">Configurar</button>
+                                </form>
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="info2">
+                        <h2>Configurar ventana automática</h2>
+                        <div class="section-content3">
+                            <div class="column3">
+                                <div class="info2">
+                                    {% if saltoVentana == 'nulo' and metaVentana == 'nulo' %}
+                                        <input type="text2" id="numero3" name="numero3" oninput="validarInput(event)" value="CO2 para abrir la ventana (ppm)">
+                                        <input type="text2" id="numero4" name="numero4" oninput="validarInput(event)" value="CO2 deseado (ppm)">
+                                    {% else %}
+                                        <input type="text2" id="numero3" name="numero3" oninput="validarInput(event)" value="{{saltoVentana}} ppm">
+                                        <input type="text2" id="numero4" name="numero4" oninput="validarInput(event)" value="{{metaVentana}} ppm">
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="column3">
+                                <form id="form2" class="info2" action="{{ url_for('configurarVentana') }}" method="POST">
+                                    <input type="hidden" id="hiddenInput3" name="input3">
+                                    <input type="hidden" id="hiddenInput4" name="input4">
+                                    <button type="submit" onclick="transferirValores('numero3', 'numero4', 'form2')">Configurar</button>
+                                </form>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}
+

@@ -1,0 +1,103 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #eaf8ff;
+    /*background-image: url('/static/images/fondo_marmol.jpg'); /* Ruta relativa a la imagen de fondo */
+    background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que se repita la imagen */
+    position: relative;
+}
+
+.navbar {
+    width: 100%;
+    background-color: #007BFF;
+    position: fixed; /* Fija la barra de navegación */
+    top: 0;
+    z-index: 100; /* Asegura que esté por encima del resto del contenido */
+}
+.a {
+    border-right: 1px solid white;
+}
+.navbar a {
+    float: left;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar a:hover {
+    background-color: #000;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 50px); /* Adjust height for the navbar */
+    position: relative;
+}
+
+.form-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%; /* Ancho inicial del formulario */
+    max-width: 400px; /* Ancho máximo para evitar que crezca demasiado en pantallas grandes */
+}
+
+.flash-message {
+    border: 2px solid red;
+    background-color: pink;
+    color: red;
+    padding: 10px;
+    margin: 10px 0;
+    display: inline-block;
+    border-radius: 5px;
+}
+.flash-message1 {
+    border: 2px solid rgb(10, 122, 0);
+    background-color: rgb(0, 199, 76);
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    margin: 10px 0;
+    display: inline-block;
+    border-radius: 5px;
+}
+.form-group, .forgot-password {
+    margin-bottom: 15px; /* Increased space between form elements */
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: calc(100% - 20px); /* Adjust width to fit padding */
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 30px; /* Increased padding */
+    border: none;
+    border-radius: 10px; /* Increased border-radius */
+    cursor: pointer;
+    font-size: 20px; /* Match font size of flash message */
+    margin-bottom: 7px; /* Adjust top margin */
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}

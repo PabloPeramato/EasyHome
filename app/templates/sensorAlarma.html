@@ -1,0 +1,52 @@
+{% extends "baseInicio.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<!doctype html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/sensorAlarma.css">
+    <script src="/static/js/sensorAlarma.js"></script>
+</head>
+<body>
+    <div id="flash-message" class="flash-message"></div>
+    <h1 name="title">{{ title }}</h1>
+    <p>Sesión iniciada como {{ session['username'] }}</p>
+    <div class="container">
+        <div class="section">
+            <div class="section-content devices">
+                <div class="column">
+                    <div class="info">
+                        <h2>Estado de la alarma</h2>
+                        <input type="text" value="{{estado}}" readonly>
+                        <div class="section-content3">
+                            <div class="column3">
+                                <form class="info2" action="{{ url_for('conectar') }}" method="POST">
+                                    <button type="submit">Conectar</button>
+                                </form>
+                            </div>
+                            <div class="column3">
+                                <form class="info2" action="{{ url_for('desconectar') }}" method="POST">
+                                    <button type="submit">Desconectar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info3">
+                        <h2>ALARMA EN CASO DE MOVIMIENTO</h2>
+                        <h3>
+                            En caso de detectar movimiento con la alarma conectada, se notificará 
+                            con un envío de mensajes al telegram previamente instalado tras
+                            la compra e instalación de los dispositivos en la vivienda.
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}

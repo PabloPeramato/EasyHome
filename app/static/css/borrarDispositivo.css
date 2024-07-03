@@ -1,0 +1,163 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #EAF8FF;
+    /*background-image: url('/static/images/fondo_marmol.jpg'); /* Ruta relativa a la imagen de fondo */
+    background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que se repita la imagen */
+}
+.container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+}
+.section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.section2 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border-top: 1px solid #cccccc;
+    text-align: center;
+    margin: 15px auto;
+}
+.section-content {
+    border-radius: 10px;
+    background-color: rgba(196, 196, 196, 0.5); /* Color de fondo con opacidad */
+    padding: 20px;
+    width: 80%;
+    max-width: 1500px;
+    height: 300px;
+    margin: 20px auto;
+    margin-bottom: 70px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    margin-top: 40px;
+    max-height: calc(100vh - 250px);
+}
+
+h1 {
+    margin-top: 75px;
+    text-align: center;
+    color: #333; /* Color del texto */
+}
+
+p {
+    text-align: center;
+    color: #555; /* Color del texto */
+    margin-bottom: 0;
+}
+.devices {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.devices ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.devices input[type="submit"] {
+    width: 300px;
+    margin: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    font-size: x-large;
+    box-sizing: border-box;
+    background-color: #fff; /* Color de fondo de los elementos */
+    height: 150px;
+}
+.devices input[type="submit"]:hover {
+    background-color: #999999;
+}
+.info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.info h2 {
+    margin-bottom: 10px;
+    color: #333; /* Color del texto */
+}
+.info p {
+    margin-bottom: 20px;
+    color: #555; /* Color del texto */
+}
+.info .buttons {
+    display: flex;
+    gap: 10px;
+    position: relative; /* Ajustar a posición relativa */
+}
+.info button {
+    background-color: #007BFF;
+    border: none;
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    position: relative; /* Añadido para posicionar el flash-message */
+}
+.info button:hover {
+    background-color: #0056b3;
+}
+.info button span {
+    position: absolute;
+    background-color: black;
+    color: white;
+    text-align: center;
+    visibility: hidden;
+    width: auto;
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 1;
+    font-size: 12px; /* Tamaño de letra más pequeño */
+    white-space: nowrap; /* Evita el salto de línea si el texto es largo */
+}
+.info button:hover span {
+    visibility: visible;
+    top: -30px; /* Ajusta la posición vertical */
+    left: 50%; /* Centra horizontalmente */
+    transform: translateX(-50%); /* Ajusta centrado horizontal */
+}
+.info .tooltip {
+    top: -30px; /* Ajusta la posición vertical */
+}
+.flash-message {
+    position: absolute;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: none;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    margin-top: -80px; /* Ajustar este valor como sea necesario */
+    z-index: 2; /* Añadido para asegurar que esté sobre los botones */
+}

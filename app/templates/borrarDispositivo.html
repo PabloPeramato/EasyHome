@@ -1,0 +1,60 @@
+{% extends "baseInicio.html" %}
+
+{% block title %}Nuevo dispositivo{% endblock %}
+
+{% block content %}
+<!doctype html>
+<html>
+<head>
+    <title>Device Management</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/borrarDispositivo.css">
+    <script src="/static/js/borrarDispositivo.js"></script>
+</head>
+<body>
+    <div id="flash-message" class="flash-message"></div>
+    <h1>Eliminar dispositivo</h1>
+    <p>Sesión iniciada como {{ session['username'] }}</p>
+    <div class="container">
+        <div class="section">
+            <div class="section-content devices">
+                <h2>DISPOSITIVOS DISPONIBLES</h2>
+                <ul>
+                    {% for device in devices %}
+                        {% if device %}
+                            {% if device == 'Temperatura y \nHumedad 🌡' %}
+                                <form method="post" action="{{ url_for('borrarTemHum') }}">
+                                    <input type="submit" id="boton" name="boton" value="{{ device }}">
+                                </form>
+                            {% elif device == 'Alarma 🚨' %}
+                                <form method="post" action="{{ url_for('borrarAlarma') }}">
+                                    <input type="submit" id="boton" name="boton" value="{{ device }}">
+                                </form>
+                            {% elif device == 'Luz automática 💡' %}
+                                <form method="post" action="{{ url_for('borrarLuzAutomatica') }}">
+                                    <input type="submit" id="boton" name="boton" value="{{ device }}">
+                                </form>
+                            {% elif device == 'Sensor de CO2 \n☁' %}
+                                <form method="post" action="{{ url_for('borrarCO2') }}">
+                                    <input type="submit" id="boton" name="boton" value="{{ device }}">
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        <h3>No hay dispositivos registrados</h3>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="section-content devices">
+                <div class="info3">
+                    <h2>INFORMACIÓN</h2>
+                    <h3>
+                        Para eliminar un nuevo dispositivo, seleccione uno de los registrados<br>
+                        y este se eliminará automáticamente de la lista de dispositivos registrados.
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock %}

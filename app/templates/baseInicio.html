@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Página principal{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/baseInicio.css">
+</head>
+<body>
+    <div class="navbar">
+        {% if 'username' in session %}
+            <a class="a" href="{{ url_for('logout') }}">Cerrar sesión</a>
+            <a class="a" href="{{ url_for('perfil') }}">Perfil {{ session['username'] }}</a>
+            {% if inicio != 'inicio' %}
+                <a class="a1" href="{{ url_for('inicio') }}">Volver Atrás</a>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
