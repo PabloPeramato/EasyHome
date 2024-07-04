@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.navbar {
+    width: 100%;
+    background-color: #007bff;
+    position: fixed; /* Fija la barra de navegación */
+    top: 0;
+    z-index: 100; /* Asegura que esté por encima del resto del contenido */
+}
+.a {
+    border-left: 1px solid white;
+}
+.navbar a {
+    float: right;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+}
+.navbar a:hover {
+    background-color: #000;
+}
+.a1 {
+    border-right: 1px solid white;
+}
+.navbar .a1 {
+    float: left;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+}
+.navbar .a1:hover {
+    background-color: #000;
+}
+.container {
+    padding: 20px;
+}

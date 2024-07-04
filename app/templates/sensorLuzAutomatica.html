@@ -1,0 +1,95 @@
+{% extends "baseInicio.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<!doctype html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/sensorLuzAutomatica.css">
+    <script src="/static/js/sensorLuzAutomatica.js"></script>
+</head>
+<body>
+    <div id="flash-message" class="flash-message"></div>
+    <h1>{{ title }}</h1>
+    <p>Sesión iniciada como {{ session['username'] }}</p>
+    <div class="container">
+        <div class="section">
+            <div class="section-content devices">
+                <div class="column">
+                    <div class="info">
+                        <h2>Luminosidad actual</h2>
+                        <input type="text" value="{{luz}} lux" readonly>
+                    </div>
+                </div>
+                <div class="section-content3">
+                    <div class="text">
+                        <h2>Datos registrados</h2>
+                    </div>
+                    <div class="column2">
+                        <div class="empty-box">
+                            <iframe src="https://thingspeak.com/channels/2583458/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=spline&update=15&width=580&height=415" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                </div> 
+                <div class="column">
+                    <div class="info2">
+                        <h2>Configuración</h2>
+                        <input type="text" value="{{configuracion}}" readonly>
+                        <div class="section-content4">
+                            <div class="column3">
+                                <form class="info2" action="{{ url_for('manual') }}" method="POST">
+                                    <button type="submit">Manual</button>
+                                </form>
+                            </div>
+                            <div class="column3">
+                                <form class="info2" action="{{ url_for('automatica') }}" method="POST">
+                                    <button type="submit">Automática</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% if configuracion == 'Manual' %}
+                        <div class="info2">
+                            <h2>Estado</h2>
+                            <input type="text" value="{{estado}}" readonly>
+                            <div class="section-content5">
+                                <div class="column3">
+                                    <form class="info2" action="{{ url_for('encender') }}" method="POST">
+                                        <button type="submit">Encender</button>
+                                    </form>
+                                </div>
+                                <div class="column3">
+                                    <form class="info2" action="{{ url_for('apagar') }}" method="POST">
+                                        <button type="submit">Apagar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% elif configuracion == 'Automática' %}
+                        <div class="info2">
+                            <h2>Estado</h2>
+                            <input type="text" value="{{estado}}" readonly>
+                        </div>
+                        <div class="info2">
+                            <h2>Configurar luminosidad</h2>
+                            {% if luminosidad == '0.00' %}
+                                <input type="text2" oninput="validarInput(event)" value="Cantidad para encender luz">
+                            {% else %}
+                                <input type="text2" name="luminoso" id="luminoso" oninput="validarInput(event)" value="{{luminosidad}}">
+                            {% endif %}
+                            <form id="form1" class="info2" action="{{ url_for('configurarLuz') }}" method="POST">
+                                <input type="hidden" id="hiddenInput1" name="input1">
+                                <button type="submit" onclick="transferirValores()">Configurar</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}

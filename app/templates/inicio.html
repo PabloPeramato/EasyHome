@@ -1,0 +1,87 @@
+{% extends "baseInicio.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<!doctype html>
+<html>
+<head>
+    <title>Device Management</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/inicio.css">
+    <script src="/static/js/inicio.js"></script>
+</head>
+<body>
+    <div id="flash-message" class="flash-message"></div>
+    <h1>Bienvenido a la página de inicio!</h1>
+    <p>Sesión iniciada como {{ session['username'] }}</p>
+    <div class="container">
+        <div class="section">
+            <div class="section-content devices">
+                <h2>DISPOSITIVOS REGISTRADOS</h2>
+                <ul>
+                    {% for device in devices %}
+                        {% if device %}
+                            {% if device == 'Temperatura y \nHumedad 🌡' %}
+                                <form method="post" action="inicio/sensorTemHum">
+                                    <input type="submit" id="boton" name="boton" value="{{ device }}">
+                                </form>
+                            {% elif device == 'Alarma 🚨' %}
+                                <form method="post" action="inicio/sensorAlarma">
+                                    <input type="submit" id="boton" name="boton" value="{{ device }}">
+                                </form>
+                            {% elif device == 'Luz automática 💡' %}
+                                <form method="post" action="inicio/sensorLuzAutomatica">
+                                    <input type="submit" id="boton" name="boton" value="{{ device }}">
+                                </form>
+                            {% elif device == 'Sensor de CO2 \n☁' %}
+                                <form method="post" action="inicio/sensorCO2">
+                                    <input type="submit" id="boton" name="boton" value="{{ device }}">
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        <li>No hay dispositivos registrados</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="section2">
+            <div class="section-content info">
+                <h2>GESTIONAR DISPOSITIVO</h2>
+                <div class="buttons">
+                    <form class="info2" action="{{ url_for('nuevoDispositivo') }}" method="POST">
+                        <button type="submit">
+                            +
+                            <span class="tooltip">Añadir</span>
+                        </button>
+                    </form>
+                    <form class="info2" action="{{ url_for('borrarDispositivo') }}" method="POST">
+                        <button type="submit">
+                            -
+                            <span class="tooltip">Eliminar</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="section2">
+            <div class="section-content info">
+                <h2>INFORMACIÓN</h2>
+                <p>Si desea obtener información o ponerse en contacto con la empresa, utilice alguna de estas vías.</p>
+                <div class="buttons">
+                    <button onclick="copyToClipboard('EasyHouse@gmail.com', this)" title="Copiar correo">
+                        📧
+                        <span class="tooltip">Copiar correo</span>
+                    </button>
+                    <button onclick="copyToClipboard('+34 618488677', this)" title="Copiar teléfono">
+                        📞
+                        <span class="tooltip">Copiar teléfono</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}

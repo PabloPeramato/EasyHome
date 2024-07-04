@@ -1,0 +1,126 @@
+{% extends "baseInicio.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<!doctype html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/sensorTemHum.css">
+    <script src="/static/js/sensorTemHum.js"></script>
+</head>
+<body>
+    <div class="background"></div> <!-- Contenedor de fondo -->
+    <div id="flash-message" class="flash-message"></div>
+    <h1>{{ title }}</h1>
+    <p>Sesión iniciada como {{ session['username'] }}</p>
+    <div class="container">
+        <div class="section">
+            <div class="section-content devices">
+                <div class="column">
+                    <div class="info">
+                        <h2>Temperatura</h2>
+                        <!--<iframe src="https://thingspeak.com/channels/2498335/widgets/884469" frameborder="0"></iframe>-->
+                        <input type="text" value="{{temperatura}}ºC" readonly>
+                        <a href="https://thingspeak.com/channels/2583458/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&update=15&type=spline&width=1500&height=800" target="_blank">
+                            <button>Gráfica</button>
+                        </a>
+                    </div>
+                    <div class="info">
+                        <h2>Humedad</h2>
+                        <!--<iframe src="https://thingspeak.com/channels/2498335/widgets/884476" frameborder="0"></iframe>-->
+                        <input type="text" value="{{humedad}}%" readonly>
+                        <a href="https://thingspeak.com/channels/2583458/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&update=15&type=spline&width=1500&height=800" target="_blank">
+                            <button>Gráfica</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="column2">
+                    <div class="info2">
+                        <h2>Activar calefacción</h2>
+                        <input type="text" value="{{estado}}" readonly>
+                        <div class="section-content4">
+                            <div class="column3">
+                                <form class="info2" action="{{ url_for('activarCalefaccion') }}" method="POST">
+                                    <button type="submit">Activar</button>
+                                </form>
+                            </div>
+                            <div class="column3">
+                                <form class="info2" action="{{ url_for('desactivarCalefaccion') }}" method="POST">
+                                    <button type="submit">Desactivar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info2">
+                        <h2>Activar aire acondicionado</h2>
+                        <input type="text" value="{{estado}}" readonly>
+                        <div class="section-content4">
+                            <div class="column3">
+                                <form class="info2" action="{{ url_for('activarAire') }}" method="POST">
+                                    <button type="submit">Activar</button>
+                                </form>
+                            </div>
+                            <div class="column3">
+                                <form class="info2" action="{{ url_for('desactivarAire') }}" method="POST">
+                                    <button type="submit">Desactivar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info2">
+                        <h2>Configurar calefacción automática</h2>
+                        <div class="section-content3">
+                            <div class="column3">
+                                <div class="info2">
+                                    {% if saltoCalefaccion == 'nulo' and metaCalefaccion == 'nulo' %}
+                                        <input type="text2" id="numero1" name="numero1" oninput="validarInput(event)" value="Temperatura para arrancar la calefacción (ºC)">
+                                        <input type="text2" id="numero2" name="numero2" oninput="validarInput(event)" value="Temperatura deseada (ºC)">
+                                    {% else %}
+                                        <input type="text2" id="numero1" name="numero1" oninput="validarInput(event)" value="{{saltoCalefaccion}} ºC">
+                                        <input type="text2" id="numero2" name="numero2" oninput="validarInput(event)" value="{{metaCalefaccion}} ºC">
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="column3">
+                                <form id="form1" class="info2" action="{{ url_for('configurarCalefaccion') }}" method="POST">
+                                    <input type="hidden" id="hiddenInput1" name="input1">
+                                    <input type="hidden" id="hiddenInput2" name="input2">
+                                    <button type="submit" onclick="transferirValores('numero1', 'numero2', 'form1')">Configurar</button>
+                                </form>
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="info2">
+                        <h2>Configurar aire acondicionado automático</h2>
+                        <div class="section-content3">
+                            <div class="column3">
+                                <div class="info2">
+                                    {% if saltoAire == 'nulo' and metaAire == 'nulo' %}
+                                        <input type="text2" id="numero3" name="numero3" oninput="validarInput(event)" value="Temperatura para arrancar el aire (ºC)">
+                                        <input type="text2" id="numero4" name="numero4" oninput="validarInput(event)" value="Temperatura deseada (ºC)">
+                                    {% else %}
+                                        <input type="text2" id="numero3" name="numero3" oninput="validarInput(event)" value="{{saltoAire}} ºC">
+                                        <input type="text2" id="numero4" name="numero4" oninput="validarInput(event)" value="{{metaAire}} ºC">
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="column3">
+                                <form id="form2" class="info2" action="{{ url_for('configurarAire') }}" method="POST">
+                                    <input type="hidden" id="hiddenInput3" name="input3">
+                                    <input type="hidden" id="hiddenInput4" name="input4">
+                                    <button type="submit" onclick="transferirValores('numero3', 'numero4', 'form2')">Configurar</button>
+                                </form>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}

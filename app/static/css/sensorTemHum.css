@@ -1,0 +1,192 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #EAF8FF;
+    /*background-image: url('/static/images/fondo_marmol.jpg'); /* Ruta relativa a la imagen de fondo */
+    background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que se repita la imagen */
+}
+iframe {
+    width: 100%; /* Ancho igual al 100% del cuadrado */
+    height: 100%; /* Altura igual al 100% del cuadrado */
+    border: none; /* Elimina el borde del iframe */
+}
+.container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+}
+.section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    overflow: hidden;
+}
+.section-content {
+    border-radius: 10px;
+    background-color: rgba(196, 196, 196, 0.5); /* Color de fondo con opacidad */
+    padding: 20px;
+    width: 80%;
+    max-width: 1500px;
+    height: 600px;
+    margin: 20px auto;
+    margin-left: 1000px;
+    margin-right: 1000px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: calc(100vh - 250px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.column {
+    border-radius: 10px;
+    border: 1px solid #b1b1b1;
+    margin: auto;
+    padding: 0 50px;
+    flex-direction: column;
+    align-items: center;
+}
+.column2 {
+    margin: auto;
+    border-radius: 10px;
+    border: 1px solid #b1b1b1;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 40px;
+    padding-right: 40px;
+}
+.column3 {
+    margin: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+h1 {
+    margin-top: 75px;
+    text-align: center;
+    color: #333; /* Color del texto */
+}
+p {
+    text-align: center;
+    color: #555; /* Color del texto */
+}
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 30px auto;
+}
+.info h2 {
+    margin-bottom: 10px;
+    margin-top: 0;
+    color: #333; /* Color del texto */
+    font-size: 20px;
+}
+.info input[type="text"] {
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: xx-large;
+    border: 2px solid #000000;
+    background-color: white;
+    border-radius: 10px;
+    pointer-events: none; /* Evita que el input sea editable */
+}
+.info button {
+    background-color: #007BFF;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: auto;
+}
+.info button:hover {
+    background-color: #0056b3;
+}
+.info2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px auto;
+}
+.info2 input[type="text2"] {
+    width: 400px;
+    height: 30px;
+    padding: 10px;
+    margin: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: medium;
+    font-weight: bold;
+    border: 2px solid #000000;
+    background-color: white;
+    border-radius: 10px;
+    color: #7e7e7e; /* Color de texto más claro */
+}
+.info2 input[type="text"] {
+    width: 200px;
+    height: 30px;
+    padding: 10px;
+    margin: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: medium;
+    font-weight: bold;
+    border: 2px solid #000000;
+    background-color: white;
+    border-radius: 10px;
+    color: #000000; /* Color de texto más claro */
+}
+.info2 h2 {
+    margin: 30px auto;
+    margin-bottom: 5px;
+    color: #333; /* Color del texto */
+    font-size: 20px;
+}
+.info2 button {
+    background-color: #007BFF;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 140px;
+}
+.info2 button:hover {
+    background-color: #0056b3;
+}
+.section-content3 {
+    border-radius: 10px;
+    margin-left: 40px;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.section-content4 {
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

@@ -1,0 +1,63 @@
+{% extends "basePerfil.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/perfil.css">
+    <script src="/static/js/perfil.js"></script>
+</head>
+<body>
+    <div id="flash-message"></div>
+    <div class="container">
+        <div class="form-box">
+            <h1>Perfil de {{ session['username'] }}</h1>
+            <form>
+                <div class="form-group">
+                    <label for="username">Usuario:</label>
+                    <input type="text" name="username" id="username" value="{{ session['username'] }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" name="mail" id="mail" value="{{ email }}">
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="phone" name="telefono" id="telefono" value="{{ telefono }}" inputmode="numeric" pattern="[0-9]*" maxlength="9" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                </div>
+            </form>
+            <div class="section-content4">
+                <div class="column3">
+                    <form class="info2" action="{{ url_for('cambiar') }}" method="POST">
+                        <button type="submit">Cambiar contraseña</button>
+                    </form>
+                </div>
+                <div class="column3">
+                    <form id="form1" class="info2" action="{{ url_for('guardarDatos') }}" method="POST">
+                        <input type="hidden" id="hiddenInput1" name="email">
+                        <input type="hidden" id="hiddenInput2" name="telefono">
+                        <button type="submit"  onclick="transferirValores()">Guardar datos</button>
+                    </form>
+                </div>
+            </div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages and (messages[-1] == 'Correo actualizado.' or messages[-1] == 'Teléfono actualizado.' or messages[-1] == 'Correo y Teléfono actualizados.') %}
+                    <div id="flash-message1" class="flash-message1">
+                        {{ messages[-1] }}
+                    </div>
+                {% elif messages and messages[-1] != 'Sesión iniciada correctamente!' %}
+                    <div id="flash-message" class="flash-message">
+                        {{ messages[-1] }}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
